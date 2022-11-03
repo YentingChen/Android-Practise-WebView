@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_gragh"
+    app:startDestination="@id/fillingURLFragment">
+
+    <fragment
+        android:id="@+id/fillingURLFragment"
+        android:name="com.example.webviewplayground.FillingURLFragment"
+        android:label="fragment_filling_url"
+        tools:layout="@layout/fragment_filling_url" >
+        <action
+            android:id="@+id/action_fillingURLFragment_to_webViewFragment"
+            app:destination="@id/webViewFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/webViewFragment"
+        android:name="com.example.webviewplayground.WebViewFragment"
+        android:label="WebViewFragment" >
+        <argument
+            android:name="urlString"
+            app:argType="string"
+            android:defaultValue="https://www.vouchercodes.co.uk/" />
+    </fragment>
+</navigation>
