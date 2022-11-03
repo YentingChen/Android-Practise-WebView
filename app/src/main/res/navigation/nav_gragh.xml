@@ -8,17 +8,18 @@
     <fragment
         android:id="@+id/fillingURLFragment"
         android:name="com.example.webviewplayground.FillingURLFragment"
-        android:label="fragment_filling_url"
+        android:label="URL Input"
         tools:layout="@layout/fragment_filling_url" >
         <action
             android:id="@+id/action_fillingURLFragment_to_webViewFragment"
-            app:destination="@id/webViewFragment" />
+            app:destination="@id/webViewFragment">
+        </action>
     </fragment>
 
     <fragment
         android:id="@+id/webViewFragment"
         android:name="com.example.webviewplayground.WebViewFragment"
-        android:label="WebViewFragment" >
+        android:label="Web View" >
         <argument
             android:name="urlString"
             app:argType="string"

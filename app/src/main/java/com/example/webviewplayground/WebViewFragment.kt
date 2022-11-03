@@ -5,16 +5,16 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.addCallback
+import androidx.navigation.fragment.navArgs
 import com.example.webviewplayground.databinding.FragmentWebviewBinding
 
 class WebViewFragment : Fragment() {
 
     private var _binding: FragmentWebviewBinding? = null
-    private val binding = _binding!!
+    private val binding get() = _binding!!
 
-    var url: String? = null
-
-    val args = WebViewFragmentArgs.fromBundle(requireArguments())
+    val args: WebViewFragmentArgs by navArgs()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -26,9 +26,7 @@ class WebViewFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        args.urlString
         binding.webview.loadUrl(args.urlString)
-
     }
-
 }
