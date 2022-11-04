@@ -6,13 +6,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.addCallback
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.navArgs
 import com.example.webviewplayground.databinding.FragmentWebviewBinding
+import com.example.webviewplayground.viewModel.WebViewModel
+import java.util.Observer
 
 class WebViewFragment : Fragment() {
 
     private var _binding: FragmentWebviewBinding? = null
     private val binding get() = _binding!!
+
+    private val sharedViewModel: WebViewModel by activityViewModels()
 
     val args: WebViewFragmentArgs by navArgs()
 
@@ -26,7 +31,8 @@ class WebViewFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        args.urlString
-        binding.webview.loadUrl(args.urlString)
+        sharedViewModel.url.observe(viewLifecycleOwner, androidx.lifecycle.Observer { urlString ->
+            binding.webview.loadUrl(urlString)
+        })
     }
 }

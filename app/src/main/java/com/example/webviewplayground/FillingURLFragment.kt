@@ -8,16 +8,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.example.webviewplayground.databinding.FragmentFillingUrlBinding
+import com.example.webviewplayground.viewModel.WebViewModel
 
 class FillingURLFragment : Fragment() {
-
     private var _binding: FragmentFillingUrlBinding? = null
     private val binding get() = _binding!!
 
     lateinit var textView: TextView
+
+    private val sharedViewModel: WebViewModel by activityViewModels()
 
     val defaulURL = "https://www.vouchercodes.co.uk/"
 
@@ -37,8 +40,13 @@ class FillingURLFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.apply {
+            viewModel = sharedViewModel
+        }
+
         binding.buttonWebView.setOnClickListener {
             val direction = FillingURLFragmentDirections.actionFillingURLFragmentToWebViewFragment(textView.text.toString())
+            sharedViewModel.setUrl(textView.text.toString())
             findNavController().navigate(direction)
         }
 
@@ -50,7 +58,6 @@ class FillingURLFragment : Fragment() {
 
         textView = binding.editTextInput
         textView.text = defaulURL
-
     }
 
 }
